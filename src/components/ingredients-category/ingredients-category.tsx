@@ -9,7 +9,7 @@ export const IngredientsCategory = forwardRef<
   TIngredientsCategoryProps
 >(({ title, titleRef, ingredients }, ref) => {
   const { bun, ingredients: selected } =
-  useSelector((s) => s.constructor) || { bun: null, ingredients: [] };
+  useSelector((s) => s.burgerConstructor) || { bun: null, ingredients: [] };
 
 
   const counters = useMemo(() => {

@@ -12,7 +12,7 @@ const initialState: ConstructorState = {
 }
 
 const constructorSlice = createSlice({
-    name: 'constructor',
+    name: 'burgerConstructor',
     initialState,
     reducers: {
         setBun(state, action: PayloadAction<TConstructorIngredient>) {

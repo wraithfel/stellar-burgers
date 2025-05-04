@@ -126,11 +126,9 @@ const authSlice = createSlice({
         state.user = payload;
         state.isAuth = true;
       })
-      .addCase(fetchUser.rejected, state => {
-        state.isLoading = false;
-        state.isAuth = false;
-        state.user = null;
-      })
+      .addCase(fetchUser.rejected, (state) => {
+            state.isLoading = false;
+           })
       // UPDATE USER
       .addCase(updateUser.pending, state => { state.isLoading = true; state.error = undefined; })
       .addCase(updateUser.fulfilled, (state, { payload }) => {

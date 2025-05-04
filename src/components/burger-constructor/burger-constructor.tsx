@@ -9,7 +9,7 @@ export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { bun, ingredients } =
-  useSelector((s) => s.constructor) || { bun: null, ingredients: [] };
+  useSelector((s) => s.burgerConstructor) || { bun: null, ingredients: [] };
 
   const { isAuth } = useSelector((s) => s.auth);
   const orderRequest = useSelector((s) => s.order.orderRequest);
