@@ -21,19 +21,27 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
             onClick={() => navigate('/')}
             style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
           >
-            <BurgerIcon type="primary" />
-            <span className="text text_type_main-default ml-2 mr-10">Конструктор</span>
+            <BurgerIcon type='primary' />
+            <span className='text text_type_main-default ml-2 mr-10'>
+              Конструктор
+            </span>
           </div>
           <div
             className={styles.link}
             onClick={() => navigate('/feed')}
             style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
           >
-            <ListIcon type="primary" />
-            <span className="text text_type_main-default ml-2">Лента заказов</span>
+            <ListIcon type='primary' />
+            <span className='text text_type_main-default ml-2'>
+              Лента заказов
+            </span>
           </div>
         </div>
-        <div className={styles.logo} onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        <div
+          className={styles.logo}
+          onClick={() => navigate('/')}
+          style={{ cursor: 'pointer' }}
+        >
           <Logo className='' />
         </div>
         <div
@@ -41,8 +49,8 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
           onClick={() => navigate('/profile')}
           style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}
         >
-          <ProfileIcon type="primary" />
-          <span className="text text_type_main-default ml-2">
+          <ProfileIcon type='primary' />
+          <span className='text text_type_main-default ml-2'>
             {userName || 'Личный кабинет'}
           </span>
         </div>

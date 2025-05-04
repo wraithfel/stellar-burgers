@@ -4,10 +4,7 @@ import { TIngredient } from '@utils-types';
 
 export const fetchIngredients = createAsyncThunk<TIngredient[]>(
   'ingredients/fetchAll',
-  async () => {
-    return await getIngredientsApi();
-
-  }
+  async () => await getIngredientsApi()
 );
 
 type IngredientsState = {
@@ -19,16 +16,16 @@ type IngredientsState = {
 const initialState: IngredientsState = {
   items: [],
   isLoading: false,
-  error: null,
+  error: null
 };
 
 const ingredientsSlice = createSlice({
   name: 'ingredients',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchIngredients.pending, state => {
+      .addCase(fetchIngredients.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(fetchIngredients.fulfilled, (state, action) => {
@@ -39,7 +36,7 @@ const ingredientsSlice = createSlice({
         state.isLoading = false;
         state.error = action.error.message ?? null;
       });
-  },
+  }
 });
 
 export default ingredientsSlice.reducer;

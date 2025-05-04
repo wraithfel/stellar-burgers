@@ -8,7 +8,7 @@ export const Login: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { isLoading, error, isAuth } = useSelector(state => state.auth);
+  const { isLoading, error, isAuth } = useSelector((state) => state.auth);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,7 +24,7 @@ export const Login: FC = () => {
 
   // Если уже в системе — редирект на главную
   if (isAuth) {
-    return <Navigate to="/" replace />;
+    return <Navigate to='/' replace />;
   }
 
   return (

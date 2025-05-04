@@ -9,14 +9,14 @@ const maxIngredients = 6;
 
 export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
   const location = useLocation();
-  const ingredients = useSelector(state => state.ingredients.items);
+  const ingredients = useSelector((state) => state.ingredients.items);
 
   const orderInfo = useMemo(() => {
     if (!ingredients.length) return null;
 
     const ingredientsInfo = order.ingredients.reduce<TIngredient[]>(
       (acc, id) => {
-        const ing = ingredients.find(i => i._id === id);
+        const ing = ingredients.find((i) => i._id === id);
         return ing ? [...acc, ing] : acc;
       },
       []
@@ -27,7 +27,14 @@ export const OrderCard: FC<OrderCardProps> = memo(({ order }) => {
     const remains = Math.max(0, ingredientsInfo.length - maxIngredients);
     const date = new Date(order.createdAt);
 
-    return { ...order, ingredientsInfo, ingredientsToShow, remains, total, date };
+    return {
+      ...order,
+      ingredientsInfo,
+      ingredientsToShow,
+      remains,
+      total,
+      date
+    };
   }, [order, ingredients]);
 
   if (!orderInfo) return null;

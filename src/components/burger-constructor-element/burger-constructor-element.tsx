@@ -2,7 +2,7 @@ import { FC, memo } from 'react';
 import { useDispatch } from '../../services/store';
 import {
   moveIngredient,
-  removeIngredient,
+  removeIngredient
 } from '../../services/slices/constructorSlice';
 import { BurgerConstructorElementUI } from '@ui';
 import { BurgerConstructorElementProps } from './type';

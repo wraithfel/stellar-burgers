@@ -11,23 +11,20 @@ interface UserOrdersState {
 const initialState: UserOrdersState = {
   orders: [],
   isLoading: false,
-  error: null,
+  error: null
 };
 
 export const fetchUserOrders = createAsyncThunk<
   TOrder[],
   void,
   { rejectValue: string }
->(
-  'userOrders/fetch',
-  async (_, { rejectWithValue }) => {
-    try {
-      return await getOrdersApi();
-    } catch (err: any) {
-      return rejectWithValue(err.message || 'Не удалось загрузить заказы');
-    }
+>('userOrders/fetch', async (_, { rejectWithValue }) => {
+  try {
+    return await getOrdersApi();
+  } catch (err: any) {
+    return rejectWithValue(err.message || 'Не удалось загрузить заказы');
   }
-);
+});
 
 const userOrdersSlice = createSlice({
   name: 'userOrders',
@@ -50,7 +47,7 @@ const userOrdersSlice = createSlice({
         state.isLoading = false;
         state.error = action.payload as string;
       });
-  },
+  }
 });
 
 export default userOrdersSlice.reducer;

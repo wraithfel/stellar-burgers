@@ -16,7 +16,7 @@ const initialState: FeedState = {
   total: 0,
   totalToday: 0,
   isLoading: false,
-  error: null,
+  error: null
 };
 
 export const fetchFeed = createAsyncThunk<
@@ -29,7 +29,7 @@ export const fetchFeed = createAsyncThunk<
     return {
       orders: data.orders,
       total: data.total,
-      totalToday: data.totalToday,
+      totalToday: data.totalToday
     };
   } catch (err: any) {
     return rejectWithValue(err.message ?? 'Failed to fetch feed');
@@ -40,23 +40,26 @@ export const feedSlice = createSlice({
   name: 'feed',
   initialState,
   reducers: {},
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
-      .addCase(fetchFeed.pending, state => {
+      .addCase(fetchFeed.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(fetchFeed.fulfilled, (state, action: PayloadAction<TOrdersData>) => {
-        state.isLoading = false;
-        state.orders = action.payload.orders;
-        state.total = action.payload.total;
-        state.totalToday = action.payload.totalToday;
-      })
+      .addCase(
+        fetchFeed.fulfilled,
+        (state, action: PayloadAction<TOrdersData>) => {
+          state.isLoading = false;
+          state.orders = action.payload.orders;
+          state.total = action.payload.total;
+          state.totalToday = action.payload.totalToday;
+        }
+      )
       .addCase(fetchFeed.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload || 'Unknown error';
       });
-  },
+  }
 });
 
 export default feedSlice.reducer;

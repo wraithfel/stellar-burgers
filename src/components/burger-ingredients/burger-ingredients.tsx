@@ -5,11 +5,11 @@ import { TTabMode } from '@utils-types';
 import { BurgerIngredientsUI } from '../ui/burger-ingredients';
 
 export const BurgerIngredients: FC = () => {
-  const items = useSelector(state => state.ingredients.items)
+  const items = useSelector((state) => state.ingredients.items);
   /** TODO: взять переменные из стора */
-  const buns = items.filter(item => item.type === 'bun');
-  const mains = items.filter(item => item.type === 'main');;
-  const sauces = items.filter(item => item.type === 'sauce');;
+  const buns = items.filter((item) => item.type === 'bun');
+  const mains = items.filter((item) => item.type === 'main');
+  const sauces = items.filter((item) => item.type === 'sauce');
 
   const [currentTab, setCurrentTab] = useState<TTabMode>('bun');
   const titleBunRef = useRef<HTMLHeadingElement>(null);

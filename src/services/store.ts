@@ -6,7 +6,6 @@ import feedReducer from './slices/feedSlice';
 import authReducer from './slices/authSlice';
 import userOrdersReducer from './slices/userOrdersSlice';
 
-
 import {
   TypedUseSelectorHook,
   useDispatch as dispatchHook,
@@ -19,7 +18,7 @@ const rootReducer = combineReducers({
   order: orderReducer,
   feed: feedReducer,
   auth: authReducer,
-  userOrders: userOrdersReducer,
+  userOrders: userOrdersReducer
 });
 
 const store = configureStore({

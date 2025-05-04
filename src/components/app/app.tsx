@@ -2,13 +2,8 @@ import '../../index.css';
 import styles from './app.module.css';
 import { useDispatch } from '../../services/store';
 import { fetchUser } from '../../services/slices/authSlice';
-import React, {useEffect} from 'react';
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  useLocation,
-} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
 import {
   ConstructorPage,
@@ -19,10 +14,16 @@ import {
   Profile,
   ProfileOrders,
   Register,
-  ResetPassword,
+  ResetPassword
 } from '@pages';
 
-import { AppHeader, Modal, IngredientDetails, OrderInfo, ProtectedRoute } from '@components';
+import {
+  AppHeader,
+  Modal,
+  IngredientDetails,
+  OrderInfo,
+  ProtectedRoute
+} from '@components';
 
 const App: React.FC = () => {
   const location = useLocation();
@@ -37,46 +38,55 @@ const App: React.FC = () => {
       <AppHeader />
 
       <Routes location={background || location}>
-        <Route path="/" element={<ConstructorPage />} />
-        <Route path="/feed" element={<Feed />} />
-        <Route path="/ingredients/:id" element={<IngredientDetails />} />
+        <Route path='/' element={<ConstructorPage />} />
+        <Route path='/feed' element={<Feed />} />
+        <Route path='/ingredients/:id' element={<IngredientDetails />} />
         <Route element={<ProtectedRoute guestOnly />}>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/profile/orders" element={<ProfileOrders />} />
-          <Route path="/profile/orders/:number" element={<OrderInfo />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/profile/orders' element={<ProfileOrders />} />
+          <Route path='/profile/orders/:number' element={<OrderInfo />} />
         </Route>
-        <Route path="/feed/:number" element={<OrderInfo />} />
-        <Route path="*" element={<NotFound404 />} />
+        <Route path='/feed/:number' element={<OrderInfo />} />
+        <Route path='*' element={<NotFound404 />} />
       </Routes>
 
       {background && (
         <Routes>
           <Route
-            path="/ingredients/:id"
+            path='/ingredients/:id'
             element={
-              <Modal onClose={() => window.history.back()} title="Детали ингредиента">
+              <Modal
+                onClose={() => window.history.back()}
+                title='Детали ингредиента'
+              >
                 <IngredientDetails />
               </Modal>
             }
           />
           <Route
-            path="/feed/:number"
+            path='/feed/:number'
             element={
-              <Modal onClose={() => window.history.back()} title="Информация о заказе">
+              <Modal
+                onClose={() => window.history.back()}
+                title='Информация о заказе'
+              >
                 <OrderInfo />
               </Modal>
             }
           />
           <Route
-            path="/profile/orders/:number"
+            path='/profile/orders/:number'
             element={
-              <Modal onClose={() => window.history.back()} title="Информация о заказе">
+              <Modal
+                onClose={() => window.history.back()}
+                title='Информация о заказе'
+              >
                 <OrderInfo />
               </Modal>
             }

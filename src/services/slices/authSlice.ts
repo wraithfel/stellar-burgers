@@ -20,13 +20,16 @@ const initialState: AuthState = {
   user: null,
   isAuth: false,
   isLoading: false,
-  error: undefined,
+  error: undefined
 };
 
 // Регистрация
 export const registerUser = createAsyncThunk(
   'auth/register',
-  async (data: { name: string; email: string; password: string }, { rejectWithValue }) => {
+  async (
+    data: { name: string; email: string; password: string },
+    { rejectWithValue }
+  ) => {
     try {
       const res = await registerUserApi(data);
       return res.user;
@@ -65,7 +68,10 @@ export const fetchUser = createAsyncThunk(
 // Обновить профиль
 export const updateUser = createAsyncThunk(
   'auth/updateUser',
-  async (data: Partial<{ name: string; email: string; password: string }>, { rejectWithValue }) => {
+  async (
+    data: Partial<{ name: string; email: string; password: string }>,
+    { rejectWithValue }
+  ) => {
     try {
       const res = await updateUserApi(data);
       return res.user;
@@ -95,10 +101,13 @@ const authSlice = createSlice({
       state.error = undefined;
     }
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       // REGISTER
-      .addCase(registerUser.pending, state => { state.isLoading = true; state.error = undefined; })
+      .addCase(registerUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
       .addCase(registerUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.user = payload;
@@ -109,7 +118,10 @@ const authSlice = createSlice({
         state.error = payload as string;
       })
       // LOGIN
-      .addCase(loginUser.pending, state => { state.isLoading = true; state.error = undefined; })
+      .addCase(loginUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.user = payload;
@@ -120,17 +132,22 @@ const authSlice = createSlice({
         state.error = payload as string;
       })
       // FETCH USER
-      .addCase(fetchUser.pending, state => { state.isLoading = true; })
+      .addCase(fetchUser.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(fetchUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.user = payload;
         state.isAuth = true;
       })
       .addCase(fetchUser.rejected, (state) => {
-            state.isLoading = false;
-           })
+        state.isLoading = false;
+      })
       // UPDATE USER
-      .addCase(updateUser.pending, state => { state.isLoading = true; state.error = undefined; })
+      .addCase(updateUser.pending, (state) => {
+        state.isLoading = true;
+        state.error = undefined;
+      })
       .addCase(updateUser.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.user = payload;
@@ -139,10 +156,11 @@ const authSlice = createSlice({
         state.isLoading = false;
         state.error = payload as string;
       })
-      // LOGOUT
-      .addCase(logoutUser.fulfilled, state => {
+      .addCase(logoutUser.fulfilled, (state) => {
         state.user = null;
         state.isAuth = false;
+        state.isLoading = false;
+        state.error = undefined;
       });
   }
 });

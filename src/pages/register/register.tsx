@@ -7,10 +7,10 @@ import { registerUser, clearError } from '../../services/slices/authSlice';
 export const Register: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { isLoading, error, isAuth } = useSelector(state => state.auth);
+  const { isLoading, error, isAuth } = useSelector((state) => state.auth);
 
   const [userName, setUserName] = useState('');
-  const [email, setEmail]       = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   if (isAuth) {
@@ -20,7 +20,9 @@ export const Register: FC = () => {
   const handleSubmit = async (e: SyntheticEvent) => {
     e.preventDefault();
     dispatch(clearError());
-    const action = await dispatch(registerUser({ name: userName, email, password }));
+    const action = await dispatch(
+      registerUser({ name: userName, email, password })
+    );
     if (registerUser.fulfilled.match(action)) {
       navigate('/', { replace: true });
     }
@@ -40,4 +42,3 @@ export const Register: FC = () => {
     />
   );
 };
-

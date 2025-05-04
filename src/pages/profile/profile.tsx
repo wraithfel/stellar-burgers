@@ -9,7 +9,7 @@ export const Profile: FC = () => {
   const [form, setForm] = useState({
     name: user.name,
     email: user.email,
-    password: '',
+    password: ''
   });
 
   useEffect(() => {
@@ -17,9 +17,7 @@ export const Profile: FC = () => {
   }, [user]);
 
   const changed =
-    form.name !== user.name ||
-    form.email !== user.email ||
-    !!form.password;
+    form.name !== user.name || form.email !== user.email || !!form.password;
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();

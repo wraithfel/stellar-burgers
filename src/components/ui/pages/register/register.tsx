@@ -29,7 +29,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
             type='text'
             placeholder='Имя'
             value={userName}
-            onChange={e => setUserName(e.target.value)}
+            onChange={(e) => setUserName(e.target.value)}
             name='name'
             error={Boolean(errorText)}
             errorText={''}
@@ -42,7 +42,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
             type='email'
             placeholder='E-mail'
             value={email}
-            onChange={e => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             name='email'
             error={Boolean(errorText)}
             errorText={errorText}
@@ -53,7 +53,7 @@ export const RegisterUI: FC<RegisterUIProps> = ({
         <div className='pb-6'>
           <PasswordInput
             value={password}
-            onChange={e => setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             name='password'
             disabled={isLoading}
           />
@@ -71,7 +71,9 @@ export const RegisterUI: FC<RegisterUIProps> = ({
       </form>
       <div className={`${styles.question} text text_type_main-default pb-6`}>
         Уже зарегистрированы?
-        <Link to='/login' className={`pl-2 ${styles.link}`}>Войти</Link>
+        <Link to='/login' className={`pl-2 ${styles.link}`}>
+          Войти
+        </Link>
       </div>
     </div>
   </main>

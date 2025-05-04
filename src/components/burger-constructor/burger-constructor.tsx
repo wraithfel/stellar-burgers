@@ -8,8 +8,10 @@ import { BurgerConstructorUI } from '@ui';
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { bun, ingredients } =
-  useSelector((s) => s.burgerConstructor) || { bun: null, ingredients: [] };
+  const { bun, ingredients } = useSelector((s) => s.burgerConstructor) || {
+    bun: null,
+    ingredients: []
+  };
 
   const { isAuth } = useSelector((s) => s.auth);
   const orderRequest = useSelector((s) => s.order.orderRequest);

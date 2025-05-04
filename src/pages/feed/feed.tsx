@@ -7,15 +7,15 @@ import { fetchIngredients } from '../../services/slices/ingredientsSlice';
 
 export const Feed: FC = () => {
   const dispatch = useDispatch();
-  const { orders, isLoading, error } = useSelector(state => state.feed);
+  const { orders, isLoading, error } = useSelector((state) => state.feed);
 
   useEffect(() => {
     dispatch(fetchFeed());
   }, [dispatch]);
 
-  useEffect(() =>{
-    dispatch(fetchIngredients())
-  }, [dispatch])
+  useEffect(() => {
+    dispatch(fetchIngredients());
+  }, [dispatch]);
 
   const handleGetFeeds = () => {
     dispatch(fetchFeed());
@@ -29,10 +29,5 @@ export const Feed: FC = () => {
     return <p>Ошибка при загрузке: {error}</p>;
   }
 
-  return (
-    <FeedUI
-      orders={orders}
-      handleGetFeeds={handleGetFeeds}
-    />
-  );
+  return <FeedUI orders={orders} handleGetFeeds={handleGetFeeds} />;
 };
