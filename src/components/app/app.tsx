@@ -1,7 +1,8 @@
-// src/App.tsx
 import '../../index.css';
 import styles from './app.module.css';
-import React from 'react';
+import { useDispatch } from '../../services/store';
+import { fetchUser } from '../../services/slices/authSlice';
+import React, {useEffect} from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -26,6 +27,10 @@ import { AppHeader, Modal, IngredientDetails, OrderInfo, ProtectedRoute } from '
 const App: React.FC = () => {
   const location = useLocation();
   const background = (location.state as any)?.background;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
 
   return (
     <div className={styles.app}>

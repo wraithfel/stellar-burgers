@@ -5,12 +5,12 @@ import { useSelector } from '../../services/store';
 
 export const BurgerConstructor: FC = () => {
   /** TODO: взять переменные constructorItems, orderRequest и orderModalData из стора */
-  const {bun, ingredients} = useSelector(state => state.constructor)
+  const { bun, ingredients = [] } = useSelector(state => state.constructor);
 
-  const constructorItems = {
-    bun: bun,
-    ingredients: ingredients
-  };
+ const constructorItems = {
+   bun,
+   ingredients
+ };
 
   const orderRequest = useSelector(state => state.order.orderRequest);
 
@@ -21,15 +21,13 @@ export const BurgerConstructor: FC = () => {
   };
   const closeOrderModal = () => {};
 
-  const price = useMemo(
-    () =>
-      (constructorItems.bun ? constructorItems.bun.price * 2 : 0) +
-      constructorItems.ingredients.reduce(
-        (s: number, v: TConstructorIngredient) => s + v.price,
-        0
-      ),
-    [constructorItems]
-  );
+  const price = useMemo(() => {
+    const bunCost = constructorItems.bun ? constructorItems.bun.price * 2 : 0;
+    
+    const fillingsCost = constructorItems.ingredients
+    .reduce((sum, item) => sum + item.price, 0);
+    return bunCost + fillingsCost;
+    }, [constructorItems.bun, constructorItems.ingredients]);
 
   return (
     <BurgerConstructorUI
