@@ -1,8 +1,8 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { TConstructorIngredient } from '@utils-types';
+import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
+import { TConstructorIngredient, TIngredient } from '@utils-types';
 
 type ConstructorState = {
-  bun: TConstructorIngredient | null;
+  bun: TIngredient | null;
   ingredients: TConstructorIngredient[];
 };
 
@@ -11,21 +11,29 @@ const initialState: ConstructorState = {
   ingredients: []
 };
 
-const constructorSlice = createSlice({
-  name: 'burgerConstructor',
+const slice = createSlice({
+  name: 'constructor',
   initialState,
   reducers: {
-    setBun(state, action: PayloadAction<TConstructorIngredient>) {
+    setBun(state, action: PayloadAction<TIngredient>) {
       state.bun = action.payload;
     },
-    addIngredient(state, action: PayloadAction<TConstructorIngredient>) {
-      state.ingredients.push(action.payload);
+
+    addIngredient: {
+      reducer(state, action: PayloadAction<TConstructorIngredient>) {
+        state.ingredients.push(action.payload);
+      },
+      prepare(ingredient: TIngredient) {
+        return { payload: { ...ingredient, id: nanoid() } };
+      }
     },
-    removeIngredient(state, action: PayloadAction<{ id: string }>) {
+
+    removeIngredient(state, action: PayloadAction<string>) {
       state.ingredients = state.ingredients.filter(
-        (item) => item.id !== action.payload.id
+        (item) => item.id !== action.payload
       );
     },
+
     moveIngredient(
       state,
       action: PayloadAction<{ fromIndex: number; toIndex: number }>
@@ -34,9 +42,13 @@ const constructorSlice = createSlice({
       const item = state.ingredients.splice(fromIndex, 1)[0];
       state.ingredients.splice(toIndex, 0, item);
     },
-    clearConstructor(state) {
-      state.bun = null;
-      state.ingredients = [];
+
+    clearConstructor() {
+      return initialState;
+    },
+
+    resetConstructor() {
+      return initialState;
     }
   }
 });
@@ -46,7 +58,8 @@ export const {
   addIngredient,
   removeIngredient,
   moveIngredient,
-  clearConstructor
-} = constructorSlice.actions;
+  clearConstructor,
+  resetConstructor
+} = slice.actions;
 
-export default constructorSlice.reducer;
+export default slice.reducer;
